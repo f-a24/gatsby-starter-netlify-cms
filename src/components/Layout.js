@@ -2,8 +2,8 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
 
-import Navbar from '../components/Navbar'
-import './all.sass'
+import Navbar from './Navbar'
+import './all.scss'
 
 const TemplateWrapper = ({ children }) => (
   <StaticQuery
@@ -20,7 +20,7 @@ const TemplateWrapper = ({ children }) => (
     render={data => (
       <div>
         <Helmet>
-          <html lang="en" />
+          <html lang="ja" />
           <title>{data.site.siteMetadata.title}</title>
           <meta name="description" content={data.site.siteMetadata.description} />
           

@@ -10,36 +10,44 @@ export default class IndexPage extends React.Component {
 
     return (
       <Layout>
-        <section className="section">
-          <div className="container">
-            <div className="content">
-              <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
-            </div>
-            {posts
-              .map(({ node: post }) => (
-                <div
-                  className="content"
-                  style={{ border: '1px solid #333', padding: '2em 4em' }}
+        <section className="home-top-section">
+          <h1 className="home-top-title">Atsushi Fujisawa</h1>
+          <div className="home-top-job">
+            <p>Main job : LoveLiver</p>
+            <p>Side job : Front-end Developer</p>
+          </div>
+          <p className="home-top-btn">more</p>
+        </section>
+        <section className="home-blog-section">
+          <p className="home-blog-title">
+            <span>Blog</span>
+          </p>
+          <div className="home-blog-content">
+          {posts
+              .map(({ node: post }, i) => (
+                <Link 
+                  className="home-content"
                   key={post.id}
+                  to={post.fields.slug}
                 >
-                  <p>
-                    <Link className="has-text-primary" to={post.fields.slug}>
+                <div className="home-content-color">
+                {post.frontmatter.date}
+                </div>
+                <div className="home-content-text">
+                <p>
                       {post.frontmatter.title}
-                    </Link>
-                    <span> &bull; </span>
-                    <small>{post.frontmatter.date}</small>
                   </p>
                   <p>
                     {post.excerpt}
-                    <br />
-                    <br />
-                    <Link className="button is-small" to={post.fields.slug}>
-                      Keep Reading →
-                    </Link>
-                  </p>
+                  </p>                
                 </div>
+                {/* <div className="foo" data-inverted={i % 2 === 0 ? "μ" : "A"}>{i % 2 === 0 ? "μ" : "A"}</div> */}
+                </Link>
               ))}
           </div>
+        </section>
+        <section className="footer">
+          <p>Copyright © 2019 @f-a24 All Rights Reserved.</p>
         </section>
       </Layout>
     )
