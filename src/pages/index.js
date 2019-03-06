@@ -16,7 +16,9 @@ export default class IndexPage extends React.Component {
             <p>Main job : LoveLiver</p>
             <p>Side job : Front-end Developer</p>
           </div>
-          <p className="home-top-btn">more</p>
+          <Link className="home-top-btn" to="/about">
+            more
+          </Link>
         </section>
         <section className="home-blog-section">
           <p className="home-blog-title">
@@ -30,24 +32,22 @@ export default class IndexPage extends React.Component {
                   key={post.id}
                   to={post.fields.slug}
                 >
-                <div className="home-content-color">
-                {post.frontmatter.date}
-                </div>
+                <div className="home-content-color" />
                 <div className="home-content-text">
                 <p>
                       {post.frontmatter.title}
                   </p>
                   <p>
                     {post.excerpt}
-                  </p>                
+                  </p>
+                  <p>
+                  {post.frontmatter.date}
+                  </p>
                 </div>
                 {/* <div className="foo" data-inverted={i % 2 === 0 ? "μ" : "A"}>{i % 2 === 0 ? "μ" : "A"}</div> */}
                 </Link>
               ))}
           </div>
-        </section>
-        <section className="footer">
-          <p>Copyright © 2019 @f-a24 All Rights Reserved.</p>
         </section>
       </Layout>
     )
