@@ -1,45 +1,14 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from "gatsby"
+import { Link, graphql } from 'gatsby'
 import styled, {keyframes} from 'styled-components';
-import Navbar from './Navbar'
+import Layout from '../components/Layout'
 
-import './all.scss'
-
-export default ({ children }) => {
-  const [stepNumber, setStepNumber] = React.useState(0);
-  return (
-  <StaticQuery
-    query={graphql`
-      query HeadingQuery {
-          site {
-            siteMetadata {
-              title,
-              description,
-            }
-          }
-        }
-    `}
-    render={data => (
-      <div>
-        <Helmet>
-          <html lang="ja" />
-          <title>{data.site.siteMetadata.title}</title>
-          <meta name="description" content={data.site.siteMetadata.description} />
-          
-          <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png" />
-	        <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32" />
-	        <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16" />
-	
-	        <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#ff4400" />
-	        <meta name="theme-color" content="#fff" />
-
-	        <meta property="og:type" content="business.business" />
-          <meta property="og:title" content={data.site.siteMetadata.title} />
-          <meta property="og:url" content="/" />
-          <meta property="og:image" content="/img/og-image.jpg" />
-        </Helmet>
-          {(stepNumber === 0 &&
+export default ({data}) => {
+    const { edges: posts } = data.allMarkdownRemark
+    const [stepNumber, setStepNumber] = React.useState(0);
+    return (
+      <Layout>
+                  {(stepNumber === 0 &&
           (<StartAnim>
             <StarBase  onAnimationEnd={() => {setStepNumber(1)}}>
               <StarSub />
@@ -64,11 +33,45 @@ export default ({ children }) => {
               <>
               {(stepNumber === 3 && (
                 <>
-                <Navbar />
-              <div>{children}</div>
-              <section className="footer">
-                <p>Copyright © 2019 @f-a24 All Rights Reserved.</p>
-              </section>
+        <section className="home-top-section">
+          <h1 className="home-top-title">Atsushi Fujisawa</h1>
+          <div className="home-top-job">
+            <p>Main job : LoveLiver</p>
+            <p>Side job : Front-end Developer</p>
+          </div>
+          <Link className="home-top-btn" to="/about">
+            more
+          </Link>
+        </section>
+        <section className="home-blog-section">
+          <p className="home-blog-title">
+            <span>Blog</span>
+          </p>
+          <div className="home-blog-content">
+          {posts
+              .map(({ node: post }, i) => (
+                <Link 
+                  className="home-content"
+                  key={post.id}
+                  to={post.fields.slug}
+                >
+                <div className="home-content-color" />
+                <div className="home-content-text">
+                <p>
+                      {post.frontmatter.title}
+                  </p>
+                  <p>
+                    {post.excerpt}
+                  </p>
+                  <p>
+                  {post.frontmatter.date}
+                  </p>
+                </div>
+                {/* <div className="foo" data-inverted={i % 2 === 0 ? "μ" : "A"}>{i % 2 === 0 ? "μ" : "A"}</div> */}
+                </Link>
+              ))}
+          </div>
+        </section>
                 </>
               ))}
               <LastAnim  onAnimationEnd={() => {setStepNumber(3)}}>
@@ -78,10 +81,32 @@ export default ({ children }) => {
               </>
             )
           }
-      </div>
-    )}
-  />
-)}
+      </Layout>
+    )
+  }
+export const pageQuery = graphql`
+  query IndexQuery {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] },
+      filter: { frontmatter: { templateKey: { eq: "blog-post" } }}
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 400)
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            templateKey
+            date(formatString: "MMMM DD, YYYY")
+          }
+        }
+      }
+    }
+  }
+`
 
 const kirakira = keyframes`
   from {
@@ -255,3 +280,4 @@ const LastSub = styled.p`
     animation: ${p2Anim} 3s;
   }
 `;
+
