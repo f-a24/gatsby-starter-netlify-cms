@@ -2,9 +2,15 @@ import React, { useContext } from 'react';
 import { Link, graphql } from 'gatsby';
 import styled, { keyframes } from 'styled-components';
 import Layout from '../components/Layout';
-import {Store, Provider} from '../store'
+import { Store as wrapStore } from '../../wrap-with-provider';
+import { Store, Provider } from '../store';
+
+export default ({data}) => <Provider>
+  <App data={data} />
+</Provider>
 
 const App = ({ data }) => {
+  // console.log('------', useContext(wrapStore));
   const { state, dispatch } = useContext(Store);
   const { chapterNo } = state;
   const { edges: posts } = data.allMarkdownRemark;
@@ -82,13 +88,6 @@ const App = ({ data }) => {
   );
 };
 
-export default ({ data }) => {
-  return (
-    <Provider>
-      <App data={data} />
-    </Provider>
-  );
-};
 export const pageQuery = graphql`
   query IndexQuery {
     allMarkdownRemark(
