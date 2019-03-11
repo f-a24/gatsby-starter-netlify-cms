@@ -2,15 +2,9 @@ import React, { useContext } from 'react';
 import { Link, graphql } from 'gatsby';
 import styled, { keyframes } from 'styled-components';
 import Layout from '../components/Layout';
-import { Store as wrapStore } from '../../wrap-with-provider';
-import { Store, Provider } from '../store';
+import { Store } from '../store';
 
-export default ({data}) => <Provider>
-  <App data={data} />
-</Provider>
-
-const App = ({ data }) => {
-  // console.log('------', useContext(wrapStore));
+export default ({ data }) => {
   const { state, dispatch } = useContext(Store);
   const { chapterNo } = state;
   const { edges: posts } = data.allMarkdownRemark;
@@ -111,13 +105,14 @@ export const pageQuery = graphql`
     }
   }
 `;
-
 const kirakira = keyframes`
   from {
     top: -100px;
+    transform: rotateY(0);
   }
   to {
     top: calc(50vh - 50px);
+    transform: rotateY(1turn);
   }
 `;
 const anim = keyframes`

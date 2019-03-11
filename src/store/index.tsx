@@ -8,7 +8,7 @@ const initialState = {
 export const Store = createContext(undefined);
 
 /*Reducer */
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: { type: string }) => {
   switch (action.type) {
     case 'ADD_NO': {
       return {
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
 };
 
 /* Provider */
-export const Provider = ({ children }) => {
+export const Provider = ({ children }: { children: JSX.Element }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>

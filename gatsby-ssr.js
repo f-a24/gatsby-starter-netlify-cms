@@ -1,5 +1,4 @@
-import wrapWithProvider from './wrap-with-provider';
+import React from 'react';
+import { Provider } from './src/store';
 
-export default {
-  wrapRootElement: wrapWithProvider
-};
+export const wrapRootElement = ({ element }) => <Provider>{element}</Provider>;

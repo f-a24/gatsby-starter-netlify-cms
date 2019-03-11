@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 import './all.scss';
 
-export default ({ children }) => (
+export default ({ children }: { children: JSX.Element }) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
