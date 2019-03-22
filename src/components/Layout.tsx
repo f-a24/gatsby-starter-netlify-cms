@@ -1,10 +1,17 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+import styled, { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-import './all.scss';
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  body {
+    overflow-x: hidden;
+  }
+`;
 
 export default ({ children }: { children: JSX.Element }) => (
   <StaticQuery
@@ -58,10 +65,44 @@ export default ({ children }: { children: JSX.Element }) => (
           <meta property="og:url" content="/" />
           <meta property="og:image" content="/img/og-image.jpg" />
         </Helmet>
+        <GlobalStyle />
         <Navbar />
+        <Background />
         <div>{children}</div>
         <Footer />
       </div>
     )}
   />
 );
+
+const Background = styled.div`
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  background-image: linear-gradient(
+      -45deg,
+      rgba(0, 173, 254, 0.1) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(0, 173, 254, 0.1) 50%,
+      rgba(0, 173, 254, 0.1) 75%,
+      transparent 75%,
+      transparent 100%
+    ),
+    linear-gradient(
+      45deg,
+      rgba(242, 74, 164, 0.1) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(242, 74, 164, 0.1) 50%,
+      rgba(242, 74, 164, 0.1) 75%,
+      transparent 75%,
+      transparent 100%
+    );
+  background-size: 200px 200px;
+  overflow-x: hidden;
+`;

@@ -2,9 +2,9 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import color from './color';
 
-export default () => (
+export default ({ animEnd }: { animEnd: () => void }) => (
   <LastAnim>
-    <LastSub />
+    <LastSub onAnimationEnd={animEnd} />
     <LastSub />
   </LastAnim>
 );
