@@ -3,7 +3,13 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 
-export const AboutPageTemplate = ({ title, profile }) => {
+export const AboutPageTemplate = ({
+  title,
+  profile
+}: {
+  title: string;
+  profile: string;
+}) => {
   return (
     <>
       <AboutTitle>{title}</AboutTitle>
@@ -24,7 +30,16 @@ export const AboutPageTemplate = ({ title, profile }) => {
   );
 };
 
-const AboutPage = ({ data }) => {
+type PostType = {
+  markdownRemark: {
+    frontmatter: {
+      title: string;
+      profile: string;
+    };
+  };
+};
+
+const AboutPage = ({ data }: { data: PostType }) => {
   const { markdownRemark: post } = data;
 
   return (
@@ -42,10 +57,8 @@ export default AboutPage;
 export const aboutPageQuery = graphql`
   query AboutPage($id: String!) {
     markdownRemark(id: { eq: $id }) {
-      html
       frontmatter {
         title
-        hoge
         profile
       }
     }

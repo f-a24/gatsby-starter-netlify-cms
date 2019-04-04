@@ -1,9 +1,19 @@
-import React from 'react'
-import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
-import { graphql, Link } from 'gatsby'
-import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
+import React from 'react';
+import { kebabCase } from 'lodash';
+import Helmet from 'react-helmet';
+import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
+import Layout from '../components/Layout';
+import Content, { HTMLContent } from '../components/Content';
+
+type TempType = {
+  content: string,
+  contentComponent: typeof HTMLContent,
+  description: string,
+  tags: string[],
+  title: string,
+  helmet: JSX.Element
+}
 
 export const BlogPostTemplate = ({
   content,
@@ -12,20 +22,16 @@ export const BlogPostTemplate = ({
   tags,
   title,
   helmet,
-}) => {
+}: TempType) => {
   const PostContent = contentComponent || Content
 
   return (
-    <section className="section">
+    <section>
       {helmet || ''}
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
+      <BlogHeader>Blog</BlogHeader>
+          <Title>{title}</Title>
             <p>{description}</p>
-            <PostContent content={content} />
+            <PostContent className="" content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -38,16 +44,25 @@ export const BlogPostTemplate = ({
                 </ul>
               </div>
             ) : null}
-          </div>
-        </div>
-      </div>
     </section>
   )
 }
 
-const BlogPost = ({ data }) => {
-  const { markdownRemark: post } = data
+type PostType = {
+  markdownRemark: {
+    id: string,
+    html: string,
+    frontmatter: {
+      date: string,
+      title: string,
+      description: string,
+      tags: string[]
+    }
+  }
+}
 
+const BlogPost = ({ data }: {data: PostType}) => {
+  const { markdownRemark: post } = data
   return (
     <Layout>
       <BlogPostTemplate
@@ -85,3 +100,25 @@ export const pageQuery = graphql`
     }
   }
 `
+const BlogHeader = styled.h1`
+  padding: 0 2rem 1rem;
+  font-size: 3rem;
+  color: #fff;
+  background: linear-gradient(
+    to right bottom,
+    rgb(242, 74, 164),
+    rgb(0, 173, 254) 50%,
+    rgba(255, 255, 255, 0) 51%
+  );
+`;
+const Title = styled.h1`
+  padding: 0 2rem 1rem;
+  font-size: 2rem;
+  color: #fff;
+  background: linear-gradient(
+    to right bottom,
+    rgb(242, 74, 164),
+    rgb(0, 173, 254) 50%,
+    rgba(255, 255, 255, 0) 51%
+  );
+`;
