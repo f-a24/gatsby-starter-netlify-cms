@@ -1,9 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 export default () => (
   <Footer className="footer">
-    <p>{window.location.href}</p>
     <p>Copyright © 2019 @f-a24 All Rights Reserved.</p>
   </Footer>
 );

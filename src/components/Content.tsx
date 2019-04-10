@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
 
 export const HTMLContent = ({
   content,
@@ -7,7 +8,10 @@ export const HTMLContent = ({
   content: string;
   className: string;
 }) => (
-  <div className={className} dangerouslySetInnerHTML={{ __html: content }} />
+  <StyledDiv
+    className={className}
+    dangerouslySetInnerHTML={{ __html: content }}
+  />
 );
 
 export default ({
@@ -16,4 +20,17 @@ export default ({
 }: {
   content: string;
   className: string;
-}) => <div className={className}>{content}</div>;
+}) => <StyledDiv className={className}>{content}</StyledDiv>;
+
+const StyledDiv = styled.div`
+  * {
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  ol {
+    list-style-type: decimal;
+    padding-inline-start: 40px;
+  }
+`;
