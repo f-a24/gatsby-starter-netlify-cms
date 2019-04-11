@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 export default () => (
   <Nav>
-    {/* Hamburger menu */}
     <input type="checkbox" id="burger-check" />
     <Burger htmlFor="burger-check">
       <span />
@@ -12,6 +11,7 @@ export default () => (
     <Menu>
       <Item to="/">Home</Item>
       <Item to="/about">About</Item>
+      <Item to="/blog">Blog</Item>
       <Item to="/products">Products</Item>
       <Item to="/contact">Contact</Item>
       <Item to="/contact/examples">Form Examples</Item>

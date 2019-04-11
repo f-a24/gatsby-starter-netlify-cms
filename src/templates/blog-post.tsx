@@ -1,10 +1,10 @@
-import React from "react";
-import { kebabCase } from "lodash";
-import Helmet from "react-helmet";
-import { graphql, Link } from "gatsby";
-import styled from "styled-components";
-import Layout from "../components/Layout";
-import Content, { HTMLContent } from "../components/Content";
+import React from 'react';
+import { kebabCase } from 'lodash';
+import Helmet from 'react-helmet';
+import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
+import Layout from '../components/Layout';
+import Content, { HTMLContent } from '../components/Content';
 
 type TempType = {
   content: string;
@@ -27,8 +27,10 @@ export const BlogPostTemplate = ({
 
   return (
     <>
-      {helmet || ""}
-      <BlogHeader>Blog</BlogHeader>
+      {helmet || ''}
+      <BlogHeader>
+        <Link to="/blog">Blog</Link>
+      </BlogHeader>
       <BlogContent>
         <BlogTitle>{title}</BlogTitle>
         <BlogDescription>{description}</BlogDescription>
@@ -73,12 +75,12 @@ const BlogPost = ({ data }: { data: PostType }) => {
         description={post.frontmatter.description}
         helmet={
           <Helmet titleTemplate="%s | Blog">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
+  <title>{`${post.frontmatter.title}`}</title>
+  <meta
               name="description"
               content={`${post.frontmatter.description}`}
             />
-          </Helmet>
+</Helmet>
         }
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
@@ -111,16 +113,19 @@ const BlogContent = styled.section`
   background-color: #fff;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 `;
-const BlogHeader = styled.h1`
+const BlogHeader = styled.div`
   padding: 0 2rem 1rem;
-  font-size: 3rem;
-  color: #fff;
   background: linear-gradient(
     to right bottom,
     rgb(242, 74, 164),
     rgb(0, 173, 254) 50%,
     rgba(255, 255, 255, 0) 51%
   );
+  > a {
+    font-size: 3rem;
+    color: #fff;
+    text-decoration: none;
+  }
 `;
 const BlogTitle = styled.h1`
   margin: 1.5rem 0;
@@ -167,7 +172,7 @@ const TagItem = styled.li`
   &:before,
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     display: block;
     height: 1px;
     width: 100%;
