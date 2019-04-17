@@ -1,15 +1,16 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import reset from 'styled-reset';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  body {
+  html, body {
     overflow-x: hidden;
+    height: 100%;
   }
 `;
 
@@ -26,7 +27,7 @@ export default ({ children }: { children: JSX.Element }) => (
       }
     `}
     render={data => (
-      <div>
+      <Contents>
         <Helmet>
           <html lang="ja" />
           <title>{data.site.siteMetadata.title}</title>
@@ -68,12 +69,29 @@ export default ({ children }: { children: JSX.Element }) => (
         <GlobalStyle />
         <Navbar />
         <Background />
-        <div>{children}</div>
+        <>{children}</>
         <Footer />
-      </div>
+      </Contents>
     )}
   />
 );
+const back_anim_a = keyframes`
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  };
+`;
+
+const back_anim_b = keyframes`
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+`;
 
 const Background = styled.div`
   width: 100vw;
@@ -83,26 +101,46 @@ const Background = styled.div`
   top: 0;
   left: 0;
   background-color: #fff;
-  background-image: linear-gradient(
-      -45deg,
-      rgba(0, 173, 254, 0.1) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(0, 173, 254, 0.1) 50%,
-      rgba(0, 173, 254, 0.1) 75%,
-      transparent 75%,
-      transparent 100%
-    ),
-    linear-gradient(
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
       45deg,
-      rgba(242, 74, 164, 0.1) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(242, 74, 164, 0.1) 50%,
-      rgba(242, 74, 164, 0.1) 75%,
-      transparent 75%,
-      transparent 100%
+      transparent,
+      transparent 2rem,
+      rgba(242, 74, 164, 0.1) 2rem,
+      rgba(242, 74, 164, 0.1) 4rem
     );
-  background-size: 200px 200px;
-  overflow-x: hidden;
+    background-size: 200% 200%;
+    transform: translateZ(-100px);
+    transform-origin: center;
+    animation: ${back_anim_b} 30s linear infinite;
+  }
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 2rem,
+      rgba(0, 173, 254, 0.1) 2rem,
+      rgba(0, 173, 254, 0.1) 4rem
+    );
+    background-size: 200% 200%;
+    transform: translateZ(-100px);
+    transform-origin: center;
+    animation: ${back_anim_a} 30s linear infinite;
+  }
+`;
+
+const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;

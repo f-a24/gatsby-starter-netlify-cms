@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 export default () => (
   <Footer className="footer">
@@ -9,6 +9,7 @@ export default () => (
 
 const Footer = styled.section`
   padding: 2rem 0 1rem;
+  margin-top: auto;
   text-align: right;
   color: #fff;
   background: linear-gradient(

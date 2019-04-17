@@ -236,7 +236,7 @@ const BlogTitle = styled.p`
 `;
 
 const BlogContent = styled.div`
-  margin-top: 1rem;
+  margin-top: 3rem;
   padding: 0 2rem;
 `;
 
