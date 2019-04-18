@@ -1,16 +1,20 @@
 ---
-templateKey: "about-page"
-path: /about
+templateKey: about-page
 title: About me
 image: /img/jumbotron.jpg
-hoge: >-
-  I am a LoveLiver!!
-  I Love Nozomi Tojo, and Yoshiko... no Yohane Tsushima！
-profile: >-
-  Kaldi is the ultimate spot for coffee lovers who want to learn about their
-  java’s origin and support the farmers that grew it. We take coffee production,
-  roasting and brewing seriously and we’re glad to pass that knowledge to
-  anyone.μ’s：東條希推し
+profile: |+
+
+  ### Name
+
+  Atsushi Fujisawa(f-a24)
+
+  ### Main job
+
+  LoveLiver
+
+  ### Side job
+
+  Front-end Developer
 ---
 
 ### Shade-grown coffee
