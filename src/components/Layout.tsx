@@ -110,9 +110,9 @@ const Background = styled.div`
     background-image: repeating-linear-gradient(
       45deg,
       transparent,
-      transparent 2rem,
-      rgba(242, 74, 164, 0.1) 2rem,
-      rgba(242, 74, 164, 0.1) 4rem
+      transparent 4rem,
+      rgba(242, 74, 164, 0.1) 4rem,
+      rgba(242, 74, 164, 0.1) 8rem
     );
     background-size: 200% 200%;
     transform: translateZ(-100px);
@@ -128,9 +128,9 @@ const Background = styled.div`
     background-image: repeating-linear-gradient(
       -45deg,
       transparent,
-      transparent 2rem,
-      rgba(0, 173, 254, 0.1) 2rem,
-      rgba(0, 173, 254, 0.1) 4rem
+      transparent 4rem,
+      rgba(0, 173, 254, 0.1) 4rem,
+      rgba(0, 173, 254, 0.1) 8rem
     );
     background-size: 200% 200%;
     transform: translateZ(-100px);

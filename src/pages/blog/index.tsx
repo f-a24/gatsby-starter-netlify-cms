@@ -16,7 +16,7 @@ export default () => (
 );
 
 const BlogHeader = styled.div`
-  padding: 0 2rem 1rem;
+  padding: 1rem;
   background: linear-gradient(
     to right bottom,
     rgb(242, 74, 164),
@@ -24,7 +24,7 @@ const BlogHeader = styled.div`
     rgba(255, 255, 255, 0) 51%
   );
   > a {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #fff;
     text-decoration: none;
   }

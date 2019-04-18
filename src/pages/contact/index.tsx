@@ -1,123 +1,149 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { navigate } from 'gatsby-link';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 
-function encode(data) {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&');
-}
+export default () => {
+  const [state, setState] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-export default class Index extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isValidated: false };
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const form = e.target;
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
-        'form-name': form.getAttribute('name'),
-        ...this.state
-      })
-    })
-      .then(() => navigate(form.getAttribute('action')))
-      .catch(error => alert(error));
-  };
-
-  render() {
-    return (
-      <Layout>
-        <ContactHeader>Contact</ContactHeader>
-        <form
-          name="contact"
-          method="post"
-          action="/contact/thanks/"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onSubmit={this.handleSubmit}
-        >
-          {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-          <input type="hidden" name="form-name" value="contact" />
-          <div hidden>
-            <label>
-              Don’t fill this out:
-{' '}
-              <input name="bot-field" onChange={this.handleChange} />
-            </label>
-          </div>
-          <div className="field">
-            <label className="label" htmlFor="name">
-              Your name
-            </label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                name="name"
-                onChange={this.handleChange}
-                id="name"
-                required
-              />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label" htmlFor="email">
-              Email
-            </label>
-            <div className="control">
-              <input
-                className="input"
-                type="email"
-                name="email"
-                onChange={this.handleChange}
-                id="email"
-                required
-              />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label" htmlFor="message">
-              Message
-            </label>
-            <div className="control">
-              <textarea
-                className="textarea"
-                name="message"
-                onChange={this.handleChange}
-                id="message"
-                required
-              />
-            </div>
-          </div>
-          <div className="field">
-            <button className="button is-link" type="submit">
-              Send
-            </button>
-          </div>
-        </form>
-      </Layout>
-    );
-  }
-}
+  const encode = data =>
+    Object.keys(data)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+  return (
+    <Layout>
+      <ContactHeader>Contact</ContactHeader>
+      <StyledForm
+        name="contact"
+        method="post"
+        action="/contact/thanks/"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={e => {
+          e.preventDefault();
+          const form = e.target as HTMLFormElement;
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode({
+              'form-name': form.getAttribute('name'),
+              ...state
+            })
+          })
+            .then(() => navigate(form.getAttribute('action') as string))
+            .catch(error => alert(error));
+        }}
+      >
+        <div>
+          <StyledLabel htmlFor="name">Your name</StyledLabel>
+          <StyledRow>
+            <StyledInput
+              type="text"
+              name="name"
+              onChange={e => {
+                setState({ ...state, name: e.target.value });
+              }}
+              id="name"
+              required
+            />
+          </StyledRow>
+        </div>
+        <div>
+          <StyledLabel htmlFor="email">Email</StyledLabel>
+          <StyledRow>
+            <StyledInput
+              type="email"
+              name="email"
+              onChange={e => {
+                setState({ ...state, email: e.target.value });
+              }}
+              id="email"
+              required
+            />
+          </StyledRow>
+        </div>
+        <div>
+          <StyledLabel htmlFor="message">Message</StyledLabel>
+          <StyledRow>
+            <StyledTextArea
+              className="textarea"
+              name="message"
+              onChange={e => {
+                setState({ ...state, message: e.target.value });
+              }}
+              id="message"
+              required
+            />
+          </StyledRow>
+        </div>
+        <div>
+          <SendButton type="submit">Send</SendButton>
+        </div>
+      </StyledForm>
+    </Layout>
+  );
+};
 
 const ContactHeader = styled.h1`
-  padding: 0 2rem 1rem;
+  padding: 1rem;
   background: linear-gradient(
     to right bottom,
     rgb(242, 74, 164),
     rgb(0, 173, 254) 50%,
     rgba(255, 255, 255, 0) 51%
   );
-  font-size: 3rem;
+  font-size: 2rem;
   color: #fff;
+`;
+const StyledForm = styled.form`
+  width: 80%;
+  margin: 2rem auto;
+`;
+const StyledRow = styled.div`
+  margin: 1rem 0;
+`;
+const StyledInput = styled.input`
+  width: 100%;
+  border-radius: 3px;
+  padding: 0.5rem 0.5rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dbdbdb;
+`;
+const StyledTextArea = styled.textarea`
+  width: 100%;
+  border-radius: 3px;
+  padding: 0.5rem 0.5rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dbdbdb;
+  max-height: 600px;
+  min-height: 120px;
+`;
+const StyledLabel = styled.label`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(242, 74, 164);
+  background: linear-gradient(
+    to right bottom,
+    rgb(242, 74, 164),
+    rgb(0, 173, 254)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+const SendButton = styled.button`
+  color: #fff;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(
+    to right bottom,
+    rgb(242, 74, 164),
+    rgb(0, 173, 254)
+  );
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
 `;

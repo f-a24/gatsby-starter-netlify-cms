@@ -9,26 +9,27 @@ export const AboutPageTemplate = ({
 }: {
   title: string;
   profile: string;
-}) => {
-  return (
-    <>
-      <AboutTitle>{title}</AboutTitle>
-      <Profile>
-        <p>{profile}</p>
-      </Profile>
-      <History>
-        <HistoryTitle>
-          <span>History</span>
-        </HistoryTitle>
-      </History>
-      <Skills>
-        <HistoryTitle>
-          <span>Skills</span>
-        </HistoryTitle>
-      </Skills>
-    </>
-  );
-};
+}) => (
+  <>
+    <AboutTitle>{title}</AboutTitle>
+    <Profile>
+      <ProfileContents>
+        <ProfileImage />
+        <ProfileText>{profile}</ProfileText>
+      </ProfileContents>
+    </Profile>
+    <History>
+      <HistoryTitle>
+        <span>History</span>
+      </HistoryTitle>
+    </History>
+    <Skills>
+      <HistoryTitle>
+        <span>Skills</span>
+      </HistoryTitle>
+    </Skills>
+  </>
+);
 
 type PostType = {
   markdownRemark: {
@@ -39,9 +40,8 @@ type PostType = {
   };
 };
 
-const AboutPage = ({ data }: { data: PostType }) => {
+export default ({ data }: { data: PostType }) => {
   const { markdownRemark: post } = data;
-
   return (
     <Layout>
       <AboutPageTemplate
@@ -51,8 +51,6 @@ const AboutPage = ({ data }: { data: PostType }) => {
     </Layout>
   );
 };
-
-export default AboutPage;
 
 export const aboutPageQuery = graphql`
   query AboutPage($id: String!) {
@@ -66,8 +64,8 @@ export const aboutPageQuery = graphql`
 `;
 
 const AboutTitle = styled.h1`
-  padding: 0 2rem 1rem;
-  font-size: 3rem;
+  padding: 1rem;
+  font-size: 2rem;
   color: #fff;
   background: linear-gradient(
     to right bottom,
@@ -79,7 +77,6 @@ const AboutTitle = styled.h1`
 
 const Profile = styled.section`
   position: relative;
-  height: 1000px;
   &::after {
     content: '';
     display: block;
@@ -95,6 +92,25 @@ const Profile = styled.section`
       rgb(0, 173, 254)
     );
   }
+`;
+
+const ProfileContents = styled.div`
+  display: flex;
+  width: 80%;
+  margin: 2rem auto 132px;
+  justify-content: center;
+`;
+
+const ProfileImage = styled.div`
+  width: 40%;
+  height: 200px;
+  background-color: aqua;
+`;
+
+const ProfileText = styled.div`
+  width: 40%;
+  padding: 1rem 2rem;
+  background-color: #fff;
 `;
 
 const History = styled.section`
@@ -121,8 +137,8 @@ const HistoryTitle = styled.p`
   position: relative;
   span {
     display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 3rem;
+    padding: 2rem 1rem;
+    font-size: 2rem;
     color: #fff;
   }
   &::before {
