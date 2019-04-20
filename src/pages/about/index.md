@@ -2,19 +2,12 @@
 templateKey: about-page
 title: About me
 image: /img/jumbotron.jpg
-profile: |+
-
-  ### Name
-
-  Atsushi Fujisawa(f-a24)
-
-  ### Main job
-
-  LoveLiver
-
-  ### Side job
-
-  Front-end Developer
+profile:
+  name: Atsushi Fujisawa(f-a24)
+  main: LoveLiver
+  side: Front-end Developer
+  hobbys:
+    - hobby: LoveLive
 ---
 
 ### Shade-grown coffee

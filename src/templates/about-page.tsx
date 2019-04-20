@@ -2,34 +2,32 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
+import Content, { HTMLContent } from '../components/Content';
 
-export const AboutPageTemplate = ({
-  title,
-  profile
-}: {
-  title: string;
-  profile: string;
-}) => (
-  <>
-    <AboutTitle>{title}</AboutTitle>
-    <Profile>
-      <ProfileContents>
-        <ProfileImage />
-        <ProfileText>{profile}</ProfileText>
-      </ProfileContents>
-    </Profile>
-    <History>
-      <HistoryTitle>
-        <span>History</span>
-      </HistoryTitle>
-    </History>
-    <Skills>
-      <HistoryTitle>
-        <span>Skills</span>
-      </HistoryTitle>
-    </Skills>
-  </>
-);
+export const AboutPageTemplate = ({ title }: { title: string }) => {
+  // const PageContent = HTMLContent || Content;
+  return (
+    <>
+      <AboutTitle>{title}</AboutTitle>
+      <Profile>
+        <ProfileContents>
+          <ProfileImage />
+          <ProfileText />
+        </ProfileContents>
+      </Profile>
+      <History>
+        <HistoryTitle>
+          <span>History</span>
+        </HistoryTitle>
+      </History>
+      <Skills>
+        <HistoryTitle>
+          <span>Skills</span>
+        </HistoryTitle>
+      </Skills>
+    </>
+  );
+};
 
 type PostType = {
   markdownRemark: {
@@ -44,10 +42,7 @@ export default ({ data }: { data: PostType }) => {
   const { markdownRemark: post } = data;
   return (
     <Layout>
-      <AboutPageTemplate
-        title={post.frontmatter.title}
-        profile={post.frontmatter.profile}
-      />
+      <AboutPageTemplate title={post.frontmatter.title} />
     </Layout>
   );
 };
@@ -57,7 +52,6 @@ export const aboutPageQuery = graphql`
     markdownRemark(id: { eq: $id }) {
       frontmatter {
         title
-        profile
       }
     }
   }

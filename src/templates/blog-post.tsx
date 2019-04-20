@@ -8,11 +8,11 @@ import Content, { HTMLContent } from '../components/Content';
 
 type TempType = {
   content: string;
-  contentComponent: typeof HTMLContent;
+  contentComponent?: typeof HTMLContent;
   description: string;
   tags: string[];
   title: string;
-  helmet: JSX.Element;
+  helmet?: JSX.Element;
 };
 
 export const BlogPostTemplate = ({
@@ -24,7 +24,6 @@ export const BlogPostTemplate = ({
   helmet
 }: TempType) => {
   const PostContent = contentComponent || Content;
-
   return (
     <>
       {helmet || ''}
@@ -65,7 +64,7 @@ type PostType = {
   };
 };
 
-const BlogPost = ({ data }: { data: PostType }) => {
+export default ({ data }: { data: PostType }) => {
   const { markdownRemark: post } = data;
   return (
     <Layout>
@@ -88,8 +87,6 @@ const BlogPost = ({ data }: { data: PostType }) => {
     </Layout>
   );
 };
-
-export default BlogPost;
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
