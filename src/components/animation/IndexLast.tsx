@@ -3,11 +3,29 @@ import styled, { keyframes } from 'styled-components';
 import color from './color';
 
 export default ({ animEnd }: { animEnd: () => void }) => (
-  <LastAnim>
-    <LastSub onAnimationEnd={animEnd} />
-    <LastSub />
-  </LastAnim>
+  <AnimArea>
+    <LastAnim>
+      <LastSub onAnimationEnd={animEnd} />
+      <LastSub />
+    </LastAnim>
+  </AnimArea>
 );
+
+const areaAnim = keyframes`
+  0% {
+    background-color: #EE55B7;
+  }
+  50% {
+    background-color: #FFF;
+  }
+  80% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+`;
+
 const divAnim = keyframes`
   from {
     transform: rotate(0deg);
@@ -45,6 +63,14 @@ const p2Anim = keyframes`
   100% {
     transform: translate(100%, 0%);
   }
+`;
+
+const AnimArea = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  animation: ${areaAnim} 3s;
+  z-index:10;
 `;
 
 const LastAnim = styled.div`

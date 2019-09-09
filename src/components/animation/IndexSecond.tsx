@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import color from './color';
 
 export default ({ animEnd }: { animEnd: () => void }) => (
-  <>
+  <AnimArea>
     <SecondAnim />
     <SecondAnim />
     <SecondAnim />
@@ -13,7 +13,7 @@ export default ({ animEnd }: { animEnd: () => void }) => (
     <SecondAnim />
     <SecondAnim />
     <SecondAnim onAnimationEnd={animEnd} />
-  </>
+  </AnimArea>
 );
 const anim = keyframes`
 from {
@@ -22,6 +22,14 @@ from {
 to {
   transform: scale(1);
 }
+`;
+
+const AnimArea = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #000;
+  z-index:10;
 `;
 
 const SecondAnim = styled.div`
@@ -36,10 +44,10 @@ const SecondAnim = styled.div`
   transform: scale(0);
   ${() =>
     Object.keys(color.aqours).reduce(
-      (a, c, i) => `
-  ${a}&:nth-of-type(${i + 1}) {
+      (a, c, i) => i === 0 ? '' : `
+  ${a}&:nth-of-type(${i}) {
     background-color: ${color.aqours[c]};
-    animation-delay: .${i}s;
+    animation-delay: .${i - 1}s;
   }`,
       ''
     )}

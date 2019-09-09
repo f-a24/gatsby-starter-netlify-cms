@@ -25,6 +25,7 @@ const StartAnim = styled.div`
   height: 100vh;
   position: fixed;
   background-color: #000;
+  z-index: 10;
 `;
 
 const StarBase = styled.div`
