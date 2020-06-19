@@ -28,23 +28,20 @@ export const AboutPageTemplate = ({ title }: { title: string }) => {
             <ProfileName>
               Atsushi Fujisawa(f-a24)
               <ProfileSocialIcon
-  href="https://twitter.com/f_a24_"
-  target="_blank"
-  rel="noopener noreferrer"
->
-</ProfileSocialIcon>
+                href="https://twitter.com/f_a24_"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
               <ProfileSocialIcon
                 href="https://github.com/f-a24"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-              </ProfileSocialIcon>
+              />
               <ProfileSocialIcon
                 href="https://codepen.io/a24/"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-              </ProfileSocialIcon>
+              />
             </ProfileName>
             <p>1993/7/13 (25)</p>
             <p>main job: LoveLiver</p>
@@ -60,7 +57,7 @@ export const AboutPageTemplate = ({ title }: { title: string }) => {
           <span>History</span>
         </HistoryTitle>
         <HistoryContents>
-          {workingHistory.map(w => (
+          {workingHistory.map((w) => (
             <HistoryItem>
               <p>{w.company}</p>
               <p>{w.period}</p>

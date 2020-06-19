@@ -10,81 +10,83 @@ export default () => {
     message: ''
   });
 
-  const encode = (data: {[key: string]: string}) =>
+  const encode = (data: { [key: string]: string }) =>
     Object.keys(data)
-      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .map(
+        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+      )
       .join('&');
   return (
     <Layout>
       <>
-      <ContactHeader>Contact</ContactHeader>
-      <StyledForm
-        name="contact"
-        method="post"
-        action="/contact/thanks/"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        onSubmit={e => {
-          e.preventDefault();
-          const form = e.target as HTMLFormElement;
-          fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode({
-              'form-name': form.getAttribute('name')!,
-              ...state
+        <ContactHeader>Contact</ContactHeader>
+        <StyledForm
+          name="contact"
+          method="post"
+          action="/contact/thanks/"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: encode({
+                'form-name': form.getAttribute('name')!,
+                ...state
+              })
             })
-          })
-            .then(() => navigate(form.getAttribute('action') as string))
-            .catch(error => alert(error));
-        }}
-      >
-        <div>
-          <StyledLabel htmlFor="name">Your name</StyledLabel>
-          <StyledRow>
-            <StyledInput
-              type="text"
-              name="name"
-              onChange={e => {
-                setState({ ...state, name: e.target.value });
-              }}
-              id="name"
-              required
-            />
-          </StyledRow>
-        </div>
-        <div>
-          <StyledLabel htmlFor="email">Email</StyledLabel>
-          <StyledRow>
-            <StyledInput
-              type="email"
-              name="email"
-              onChange={e => {
-                setState({ ...state, email: e.target.value });
-              }}
-              id="email"
-              required
-            />
-          </StyledRow>
-        </div>
-        <div>
-          <StyledLabel htmlFor="message">Message</StyledLabel>
-          <StyledRow>
-            <StyledTextArea
-              className="textarea"
-              name="message"
-              onChange={e => {
-                setState({ ...state, message: e.target.value });
-              }}
-              id="message"
-              required
-            />
-          </StyledRow>
-        </div>
-        <div>
-          <SendButton type="submit">Send</SendButton>
-        </div>
-      </StyledForm>
+              .then(() => navigate(form.getAttribute('action') as string))
+              .catch((error) => alert(error));
+          }}
+        >
+          <div>
+            <StyledLabel htmlFor="name">Your name</StyledLabel>
+            <StyledRow>
+              <StyledInput
+                type="text"
+                name="name"
+                onChange={(e) => {
+                  setState({ ...state, name: e.target.value });
+                }}
+                id="name"
+                required
+              />
+            </StyledRow>
+          </div>
+          <div>
+            <StyledLabel htmlFor="email">Email</StyledLabel>
+            <StyledRow>
+              <StyledInput
+                type="email"
+                name="email"
+                onChange={(e) => {
+                  setState({ ...state, email: e.target.value });
+                }}
+                id="email"
+                required
+              />
+            </StyledRow>
+          </div>
+          <div>
+            <StyledLabel htmlFor="message">Message</StyledLabel>
+            <StyledRow>
+              <StyledTextArea
+                className="textarea"
+                name="message"
+                onChange={(e) => {
+                  setState({ ...state, message: e.target.value });
+                }}
+                id="message"
+                required
+              />
+            </StyledRow>
+          </div>
+          <div>
+            <SendButton type="submit">Send</SendButton>
+          </div>
+        </StyledForm>
       </>
     </Layout>
   );

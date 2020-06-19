@@ -29,7 +29,7 @@ const AnimArea = styled.div`
   height: 100vh;
   position: fixed;
   background-color: #000;
-  z-index:10;
+  z-index: 10;
 `;
 
 const SecondAnim = styled.div`
@@ -44,7 +44,10 @@ const SecondAnim = styled.div`
   transform: scale(0);
   ${() =>
     Object.keys(color.aqours).reduce(
-      (a, c, i) => i === 0 ? '' : `
+      (a, c, i) =>
+        i === 0
+          ? ''
+          : `
   ${a}&:nth-of-type(${i}) {
     background-color: ${color.aqours[c]};
     animation-delay: .${i - 1}s;

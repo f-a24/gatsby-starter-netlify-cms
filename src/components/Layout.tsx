@@ -26,7 +26,7 @@ export default ({ children }: { children: JSX.Element }) => (
         }
       }
     `}
-    render={data => (
+    render={(data) => (
       <Contents>
         <Helmet>
           <html lang="ja" />

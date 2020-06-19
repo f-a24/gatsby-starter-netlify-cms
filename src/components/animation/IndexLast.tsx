@@ -70,7 +70,7 @@ const AnimArea = styled.div`
   height: 100vh;
   position: fixed;
   animation: ${areaAnim} 3s;
-  z-index:10;
+  z-index: 10;
 `;
 
 const LastAnim = styled.div`

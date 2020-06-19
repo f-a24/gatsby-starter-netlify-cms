@@ -6,14 +6,14 @@ const initialState = {
 };
 
 type ContextType = {
-  state: typeof initialState,
-  dispatch: Dispatch<{ type: 'ADD_NO' }>
-}
+  state: typeof initialState;
+  dispatch: Dispatch<{ type: 'ADD_NO' }>;
+};
 
 /* Store */
 export const Store = createContext<ContextType | null>(null);
 
-/*Reducer */
+/* Reducer */
 const reducer = (state = initialState, action: { type: 'ADD_NO' }) => {
   switch (action.type) {
     case 'ADD_NO': {

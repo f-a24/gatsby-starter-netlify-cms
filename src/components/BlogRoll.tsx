@@ -18,7 +18,7 @@ class BlogRoll extends React.Component<{ data: any }> {
               {post.frontmatter.tags && post.frontmatter.tags.length ? (
                 <TagList>
                   {post.frontmatter.tags.map((tag: any) => (
-                    <TagItem key={tag + `tag`}>{tag}</TagItem>
+                    <TagItem key={`${tag}tag`}>{tag}</TagItem>
                   ))}
                 </TagList>
               ) : null}

@@ -45,12 +45,12 @@
     "develop": "npm run clean && gatsby develop",
     "serve": "gatsby serve",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "format": "prettier-eslint --write src/**/*.{ts,tsx}",
+    "format": "eslint --fix src/**/*.{ts,tsx}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "prettier-eslint --write",
+      "eslint --fix",
       "git add"
     ]
   },
@@ -71,8 +71,6 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "prettier-eslint": "^11.0.0",
-    "prettier-eslint-cli": "^5.0.0",
     "rimraf": "^3.0.2"
   }
 }

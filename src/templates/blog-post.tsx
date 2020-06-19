@@ -38,8 +38,8 @@ export const BlogPostTemplate = ({
           <TagsBlock>
             <TagsTitle>Tags</TagsTitle>
             <TagList>
-              {tags.map(tag => (
-                <TagItem key={tag + `tag`}>
+              {tags.map((tag) => (
+                <TagItem key={`${tag}tag`}>
                   <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
                 </TagItem>
               ))}
@@ -74,12 +74,12 @@ export default ({ data }: { data: PostType }) => {
         description={post.frontmatter.description}
         helmet={
           <Helmet titleTemplate="%s | Blog">
-  <title>{`${post.frontmatter.title}`}</title>
-  <meta
+            <title>{`${post.frontmatter.title}`}</title>
+            <meta
               name="description"
               content={`${post.frontmatter.description}`}
             />
-</Helmet>
+          </Helmet>
         }
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}

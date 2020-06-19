@@ -7,12 +7,12 @@ import BlogRoll from '../../components/BlogRoll';
 export default () => (
   <Layout>
     <>
-    <BlogHeader>
-      <Link to="/blog">Blog</Link>
-    </BlogHeader>
-    <BlogList>
-      <BlogRoll />
-    </BlogList>
+      <BlogHeader>
+        <Link to="/blog">Blog</Link>
+      </BlogHeader>
+      <BlogList>
+        <BlogRoll />
+      </BlogList>
     </>
   </Layout>
 );
