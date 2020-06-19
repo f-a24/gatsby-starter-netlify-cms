@@ -8,7 +8,7 @@ import IndexLast from '../components/animation/IndexLast';
 import { Store } from '../store';
 
 export default ({ data }) => {
-  const { state, dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store)!;
   const { chapterNo } = state;
   const [cnt, setCnt] = useState(0);
   const { edges: posts } = data.allMarkdownRemark;

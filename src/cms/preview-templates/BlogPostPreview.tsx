@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { BlogPostTemplate } from '../../templates/blog-post';
 
-export default ({
-  entry,
-  widgetFor
-}: {
+type Props = {
   entry: {
-    getIn(arg: string[]): string | string[];
+    getIn<T extends string>(arg: ['data', T]): T extends 'tags' ? string[] : string;
   };
   widgetFor(arg: string): string;
-}) => (
+};
+
+const BlogPostPreview: FC<Props> = ({ entry, widgetFor}) => (
   <BlogPostTemplate
     content={widgetFor('body')}
-    description={entry.getIn(['data', 'description']) as string}
-    tags={entry.getIn(['data', 'tags']) as string[]}
-    title={entry.getIn(['data', 'title']) as string}
+    description={entry.getIn(['data', 'description'])}
+    tags={entry.getIn(['data', 'tags'])}
+    title={entry.getIn(['data', 'title'])}
   />
 );
+
+export default BlogPostPreview;

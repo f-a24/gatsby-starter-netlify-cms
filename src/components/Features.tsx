@@ -1,9 +1,9 @@
 import React from 'react';
 import PreviewCompatibleImage from './PreviewCompatibleImage';
 
-export default ({ gridItems }) => (
+export default ({ gridItems }: any) => (
   <div className="columns is-multiline">
-    {gridItems.map(item => (
+    {gridItems.map((item: any) => (
       <div key={item.text} className="column is-6">
         <section className="section">
           <div className="has-text-centered">

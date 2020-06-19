@@ -10,12 +10,13 @@ export default () => {
     message: ''
   });
 
-  const encode = data =>
+  const encode = (data: {[key: string]: string}) =>
     Object.keys(data)
       .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
       .join('&');
   return (
     <Layout>
+      <>
       <ContactHeader>Contact</ContactHeader>
       <StyledForm
         name="contact"
@@ -30,7 +31,7 @@ export default () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: encode({
-              'form-name': form.getAttribute('name'),
+              'form-name': form.getAttribute('name')!,
               ...state
             })
           })
@@ -84,6 +85,7 @@ export default () => {
           <SendButton type="submit">Send</SendButton>
         </div>
       </StyledForm>
+      </>
     </Layout>
   );
 };

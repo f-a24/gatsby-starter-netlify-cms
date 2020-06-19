@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import reset from 'styled-reset';

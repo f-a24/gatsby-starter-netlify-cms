@@ -2,39 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import Content, { HTMLContent } from '../components/Content';
-
-import profileIcon from '../img/profile.jpg';
-import githubIcon from '../img/github-icon.svg';
-import twitterIcon from '../img/twitter.svg';
-import codepenIcon from '../img/codepen-icon.svg';
-
-import html5Icon from '../img/html5.svg';
-import css3Icon from '../img/css3.svg';
-import sassIcon from '../img/sass.svg';
-import javascriptIcon from '../img/javascript.svg';
-import typescriptIcon from '../img/typescript.svg';
-import reactIcon from '../img/react.svg';
-import reduxIcon from '../img/redux.svg';
-import nextjsIcon from '../img/nextjs.svg';
-import gatsbyIcon from '../img/gatsby.svg';
-import vueIcon from '../img/vue.svg';
-import nuxtIcon from '../img/nuxt.svg';
-import createjsIcon from '../img/createjs.svg';
-import threeIcon from '../img/three.svg';
-import webpackIcon from '../img/webpack.svg';
-import nodejsIcon from '../img/nodejs.svg';
-import expressIcon from '../img/express.svg';
-import socketioIcon from '../img/socket.io.svg';
-import phpIcon from '../img/php.svg';
-import cakephpIcon from '../img/cakephp.svg';
-import wordpressIcon from '../img/wordpress.svg';
-import pythonIcon from '../img/python.svg';
-import djangoIcon from '../img/django.svg';
-import javaIcon from '../img/java.svg';
-import springIcon from '../img/spring.svg';
-import perlIcon from '../img/perl.svg';
-import dotnetIcon from '../img/dotnet.svg';
 
 const workingHistory = [
   {
@@ -52,13 +19,11 @@ const workingHistory = [
 ];
 
 export const AboutPageTemplate = ({ title }: { title: string }) => {
-  // const PageContent = HTMLContent || Content;
   return (
     <>
       <AboutTitle>{title}</AboutTitle>
       <Profile>
         <ProfileContents>
-          <ProfileImage src={profileIcon} alt="profile" />
           <ProfileText>
             <ProfileName>
               Atsushi Fujisawa(f-a24)
@@ -67,21 +32,18 @@ export const AboutPageTemplate = ({ title }: { title: string }) => {
   target="_blank"
   rel="noopener noreferrer"
 >
-  <img src={twitterIcon} alt="twitter" />
 </ProfileSocialIcon>
               <ProfileSocialIcon
                 href="https://github.com/f-a24"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={githubIcon} alt="github" />
               </ProfileSocialIcon>
               <ProfileSocialIcon
                 href="https://codepen.io/a24/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={codepenIcon} alt="codepen" />
               </ProfileSocialIcon>
             </ProfileName>
             <p>1993/7/13 (25)</p>
@@ -113,195 +75,6 @@ export const AboutPageTemplate = ({ title }: { title: string }) => {
           ))}
         </HistoryBorder>
       </History>
-      <Skills>
-        <HistoryTitle>
-          <span>Skills</span>
-        </HistoryTitle>
-        <SkillsContents>
-          <SkillsLink
-            href="https://developer.mozilla.org/ja/docs/Web/Guide/HTML/HTML5"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={html5Icon} alt="HTML5" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS3"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={css3Icon} alt="CSS3" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://sass-lang.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={sassIcon} alt="SASS" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://developer.mozilla.org/ja/docs/Web/JavaScript"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={javascriptIcon} alt="JavaScript" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://www.typescriptlang.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={typescriptIcon} alt="TypeScript" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={reactIcon} alt="React" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={reduxIcon} alt="Redux" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://nextjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={nextjsIcon} alt="Next" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://www.gatsbyjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={gatsbyIcon} alt="Gatsby" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://jp.vuejs.org/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={vueIcon} alt="Vue" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://ja.nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={nuxtIcon} alt="Nuxt" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://createjs.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={createjsIcon} alt="CreateJS" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://threejs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={threeIcon} alt="three.js" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://webpack.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={webpackIcon} alt="webpack" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://nodejs.org/ja/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={nodejsIcon} alt="nodejs" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://expressjs.com/ja/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={expressIcon} alt="express" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://socket.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={socketioIcon} alt="socket.io" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://php.net/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={phpIcon} alt="php" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://cakephp.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={cakephpIcon} alt="cakephp" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://wordpress.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={wordpressIcon} alt="wordpress" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://www.python.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={pythonIcon} alt="python" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://www.djangoproject.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={djangoIcon} alt="django" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://www.java.com/ja/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={javaIcon} alt="java" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://spring.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={springIcon} alt="spring" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://www.perl.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={perlIcon} alt="perl" />
-          </SkillsLink>
-          <SkillsLink
-            href="https://dotnet.microsoft.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={dotnetIcon} alt="dotnet" />
-          </SkillsLink>
-        </SkillsContents>
-      </Skills>
     </>
   );
 };

@@ -16,7 +16,7 @@ export const ProductPageTemplate = ({
   testimonials,
   fullImage,
   pricing
-}) => (
+}: any) => (
   <section className="section section--gradient">
     <div className="container">
       <div className="section">
@@ -107,7 +107,7 @@ export const ProductPageTemplate = ({
   </section>
 );
 
-const ProductPage = ({ data }) => {
+const ProductPage = ({ data }: any) => {
   const { frontmatter } = data.markdownRemark;
 
   return (

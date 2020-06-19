@@ -1,10 +1,10 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 
-export default ({ data, pageContext }) => (
+export default ({ data, pageContext }: any) => (
   <Layout>
     <section className="section">
       <Helmet title={`${pageContext.tag} | ${data.site.siteMetadata.title}`} />
@@ -14,7 +14,7 @@ export default ({ data, pageContext }) => (
         } tagged with “${pageContext.tag}”`}
       </TagHeader>
       <BlogList>
-        {data.allMarkdownRemark.edges.map(post => (
+        {data.allMarkdownRemark.edges.map((post: any) => (
           <BlogItem to={post.node.fields.slug} key={post.node.fields.slug}>
             <BlogTitle>{post.node.frontmatter.title}</BlogTitle>
           </BlogItem>

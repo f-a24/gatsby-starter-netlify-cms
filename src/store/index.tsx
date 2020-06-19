@@ -1,14 +1,20 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, Dispatch, useReducer } from 'react';
 
 /* initialState */
 const initialState = {
   chapterNo: 0
 };
+
+type ContextType = {
+  state: typeof initialState,
+  dispatch: Dispatch<{ type: 'ADD_NO' }>
+}
+
 /* Store */
-export const Store = createContext(undefined);
+export const Store = createContext<ContextType | null>(null);
 
 /*Reducer */
-const reducer = (state = initialState, action: { type: string }) => {
+const reducer = (state = initialState, action: { type: 'ADD_NO' }) => {
   switch (action.type) {
     case 'ADD_NO': {
       return {

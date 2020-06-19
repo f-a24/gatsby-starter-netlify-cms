@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default ({ data }) => (
+export default ({ data }: any) => (
   <div className="columns">
-    {data.map(price => (
+    {data.map((price: any) => (
       <div key={price.plan} className="column">
         <section className="section">
           <h4 className="has-text-centered has-text-weight-semibold">
@@ -14,7 +14,7 @@ export default ({ data }) => (
           </h2>
           <p className="has-text-weight-semibold">{price.description}</p>
           <ul>
-            {price.items.map(item => (
+            {price.items.map((item: any) => (
               <li key={item} className="is-size-5">
                 {item}
               </li>

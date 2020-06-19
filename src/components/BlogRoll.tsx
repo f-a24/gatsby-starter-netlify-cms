@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, graphql, StaticQuery } from 'gatsby';
 import styled from 'styled-components';
 
-class BlogRoll extends React.Component {
+class BlogRoll extends React.Component<{ data: any }> {
   render() {
     const { data } = this.props;
     const { edges: posts } = data.allMarkdownRemark;
@@ -10,14 +10,14 @@ class BlogRoll extends React.Component {
     return (
       <>
         {posts &&
-          posts.map(({ node: post }) => (
+          posts.map(({ node: post }: any) => (
             <BlogItem to={post.fields.slug} key={post.id}>
               <BlogTitle>{post.frontmatter.title}</BlogTitle>
               <BlogData>{post.frontmatter.date}</BlogData>
               <BlogContent>{post.excerpt}</BlogContent>
               {post.frontmatter.tags && post.frontmatter.tags.length ? (
                 <TagList>
-                  {post.frontmatter.tags.map(tag => (
+                  {post.frontmatter.tags.map((tag: any) => (
                     <TagItem key={tag + `tag`}>{tag}</TagItem>
                   ))}
                 </TagList>
@@ -55,7 +55,7 @@ export default () => (
         }
       }
     `}
-    render={(data, count) => <BlogRoll data={data} count={count} />}
+    render={(data: any) => <BlogRoll data={data} />}
   />
 );
 
