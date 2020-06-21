@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { kebabCase } from 'lodash';
 import { Helmet } from 'react-helmet';
 import { graphql, Link } from 'gatsby';
@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Content, { HTMLContent } from '../components/Content';
 
-type TempType = {
-  content: string;
+type TemplateType = {
+  content: any;
   contentComponent?: typeof HTMLContent;
   description: string;
   tags: string[];
@@ -15,14 +15,14 @@ type TempType = {
   helmet?: JSX.Element;
 };
 
-export const BlogPostTemplate = ({
+export const BlogPostTemplate: React.FC<TemplateType> = ({
   content,
   contentComponent,
   description,
   tags,
   title,
   helmet
-}: TempType) => {
+}) => {
   const PostContent = contentComponent || Content;
   return (
     <>
@@ -38,7 +38,7 @@ export const BlogPostTemplate = ({
           <TagsBlock>
             <TagsTitle>Tags</TagsTitle>
             <TagList>
-              {tags.map((tag) => (
+              {tags.map(tag => (
                 <TagItem key={`${tag}tag`}>
                   <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
                 </TagItem>
@@ -64,7 +64,7 @@ type PostType = {
   };
 };
 
-export default ({ data }: { data: PostType }) => {
+const BlogPost: React.FC<{ data: PostType }> = ({ data }) => {
   const { markdownRemark: post } = data;
   return (
     <Layout>
@@ -87,6 +87,8 @@ export default ({ data }: { data: PostType }) => {
     </Layout>
   );
 };
+
+export default BlogPost;
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {

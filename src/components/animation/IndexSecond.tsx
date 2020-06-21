@@ -1,8 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import color from './color';
 
-export default ({ animEnd }: { animEnd: () => void }) => (
+type PropsType = { animEnd: () => void };
+
+const IndexSecond: React.FC<PropsType> = ({ animEnd }) => (
   <AnimArea>
     <SecondAnim />
     <SecondAnim />
@@ -15,6 +17,9 @@ export default ({ animEnd }: { animEnd: () => void }) => (
     <SecondAnim onAnimationEnd={animEnd} />
   </AnimArea>
 );
+
+export default IndexSecond;
+
 const anim = keyframes`
 from {
   transform: scale(0);

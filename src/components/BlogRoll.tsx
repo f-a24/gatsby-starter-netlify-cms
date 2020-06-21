@@ -1,35 +1,36 @@
-import React from 'react';
+import * as React from 'react';
 import { Link, graphql, StaticQuery } from 'gatsby';
 import styled from 'styled-components';
 
-class BlogRoll extends React.Component<{ data: any }> {
-  render() {
-    const { data } = this.props;
-    const { edges: posts } = data.allMarkdownRemark;
+type BrogRollDataType = {
+  data: any;
+};
 
-    return (
-      <>
-        {posts &&
-          posts.map(({ node: post }: any) => (
-            <BlogItem to={post.fields.slug} key={post.id}>
-              <BlogTitle>{post.frontmatter.title}</BlogTitle>
-              <BlogData>{post.frontmatter.date}</BlogData>
-              <BlogContent>{post.excerpt}</BlogContent>
-              {post.frontmatter.tags && post.frontmatter.tags.length ? (
-                <TagList>
-                  {post.frontmatter.tags.map((tag: any) => (
-                    <TagItem key={`${tag}tag`}>{tag}</TagItem>
-                  ))}
-                </TagList>
-              ) : null}
-            </BlogItem>
-          ))}
-      </>
-    );
-  }
-}
+const BlogRollComponents: React.FC<BrogRollDataType> = ({ data }) => {
+  const { edges: posts } = data.allMarkdownRemark;
 
-export default () => (
+  return (
+    <>
+      {posts &&
+        posts.map(({ node: post }: any) => (
+          <BlogItem to={post.fields.slug} key={post.id}>
+            <BlogTitle>{post.frontmatter.title}</BlogTitle>
+            <BlogData>{post.frontmatter.date}</BlogData>
+            <BlogContent>{post.excerpt}</BlogContent>
+            {post.frontmatter.tags && post.frontmatter.tags.length ? (
+              <TagList>
+                {post.frontmatter.tags.map((tag: any) => (
+                  <TagItem key={`${tag}tag`}>{tag}</TagItem>
+                ))}
+              </TagList>
+            ) : null}
+          </BlogItem>
+        ))}
+    </>
+  );
+};
+
+const BlogRoll: React.FC = () => (
   <StaticQuery
     query={graphql`
       query BlogRollQuery {
@@ -55,9 +56,11 @@ export default () => (
         }
       }
     `}
-    render={(data: any) => <BlogRoll data={data} />}
+    render={(data: any) => <BlogRollComponents data={data} />}
   />
 );
+
+export default BlogRoll;
 
 const BlogItem = styled(Link)`
   width: 45%;

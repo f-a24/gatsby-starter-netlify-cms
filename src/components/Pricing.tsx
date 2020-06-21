@@ -1,6 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 
-export default ({ data }: any) => (
+type PropsType = { data: any };
+
+const Pricing: React.FC<PropsType> = ({ data }: any) => (
   <div className="columns">
     {data.map((price: any) => (
       <div key={price.plan} className="column">
@@ -24,3 +26,5 @@ export default ({ data }: any) => (
     ))}
   </div>
 );
+
+export default Pricing;

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default ({ children }: { children: JSX.Element }) => (
+const Layout: React.FC = ({ children }) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
@@ -26,7 +26,7 @@ export default ({ children }: { children: JSX.Element }) => (
         }
       }
     `}
-    render={(data) => (
+    render={data => (
       <Contents>
         <Helmet>
           <html lang="ja" />
@@ -75,7 +75,10 @@ export default ({ children }: { children: JSX.Element }) => (
     )}
   />
 );
-const back_anim_a = keyframes`
+
+export default Layout;
+
+const backAnimA = keyframes`
   0% {
     background-position: 100%;
   }
@@ -84,7 +87,7 @@ const back_anim_a = keyframes`
   };
 `;
 
-const back_anim_b = keyframes`
+const backAnimB = keyframes`
   0% {
     background-position: 0%;
   }
@@ -117,7 +120,7 @@ const Background = styled.div`
     background-size: 200% 200%;
     transform: translateZ(-100px);
     transform-origin: center;
-    animation: ${back_anim_b} 30s linear infinite;
+    animation: ${backAnimB} 30s linear infinite;
   }
   &::after {
     content: '';
@@ -135,7 +138,7 @@ const Background = styled.div`
     background-size: 200% 200%;
     transform: translateZ(-100px);
     transform-origin: center;
-    animation: ${back_anim_a} 30s linear infinite;
+    animation: ${backAnimA} 30s linear infinite;
   }
 `;
 

@@ -1,12 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-export const HTMLContent = ({
-  content,
-  className
-}: {
+type HTMLContentPropsType = {
   content: string;
   className: string;
+};
+
+type ContentPropsType = {
+  content: JSX.Element;
+  className: string;
+};
+
+export const HTMLContent: React.FC<HTMLContentPropsType> = ({
+  content,
+  className
 }) => (
   <StyledDiv
     className={className}
@@ -14,13 +21,11 @@ export const HTMLContent = ({
   />
 );
 
-export default ({
-  content,
-  className
-}: {
-  content: string;
-  className: string;
-}) => <StyledDiv className={className}>{content}</StyledDiv>;
+const Content: React.FC<ContentPropsType> = ({ content, className }) => (
+  <StyledDiv className={className}>{content}</StyledDiv>
+);
+
+export default Content;
 
 const StyledDiv = styled.div`
   * {

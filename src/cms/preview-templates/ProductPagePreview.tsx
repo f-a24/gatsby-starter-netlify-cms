@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
+import { PreviewTemplateComponentProps } from 'netlify-cms-core';
 import { ProductPageTemplate } from '../../templates/product-page';
 
-type Props = {
-  entry: {
-    getIn(arg: string[]): any;
-  };
-  getAsset(arg: string): string;
-};
-
-const ProductPagePreview: FC<Props> = ({ entry, getAsset }) => {
+const ProductPagePreview: FC<PreviewTemplateComponentProps> = ({
+  entry,
+  getAsset
+}) => {
   const entryBlurbs = entry.getIn(['data', 'intro', 'blurbs']);
   const blurbs = entryBlurbs ? entryBlurbs.toJS() : [];
 

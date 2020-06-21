@@ -1,7 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import PreviewCompatibleImage from './PreviewCompatibleImage';
 
-export default ({ gridItems }: any) => (
+type PropsType = {
+  gridItems: any;
+};
+
+const Features: React.FC<PropsType> = ({ gridItems }: any) => (
   <div className="columns is-multiline">
     {gridItems.map((item: any) => (
       <div key={item.text} className="column is-6">
@@ -22,3 +26,5 @@ export default ({ gridItems }: any) => (
     ))}
   </div>
 );
+
+export default Features;

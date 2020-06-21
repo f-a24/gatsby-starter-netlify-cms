@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 
-export default ({ data, pageContext }: any) => (
+const Tags: React.FC<any> = ({ data, pageContext }: any) => (
   <Layout>
     <section className="section">
       <Helmet title={`${pageContext.tag} | ${data.site.siteMetadata.title}`} />
@@ -26,6 +26,8 @@ export default ({ data, pageContext }: any) => (
     </section>
   </Layout>
 );
+
+export default Tags;
 
 export const tagPageQuery = graphql`
   query TagPage($tag: String) {

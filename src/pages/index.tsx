@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
@@ -7,7 +7,9 @@ import IndexSecond from '../components/animation/IndexSecond';
 import IndexLast from '../components/animation/IndexLast';
 import { Store } from '../store';
 
-export default ({ data }) => {
+type Props = { data: any };
+
+const Top: FC<Props> = ({ data }) => {
   const { state, dispatch } = useContext(Store)!;
   const { chapterNo } = state;
   const [cnt, setCnt] = useState(0);
@@ -42,16 +44,29 @@ export default ({ data }) => {
                 <span>Blog</span>
               </BlogTitle>
               <BlogContent>
-                {posts.map(({ node: post }) => (
-                  <Content key={post.id} to={post.fields.slug}>
-                    <ContentColor />
-                    <ContentText>
-                      <p>{post.frontmatter.title}</p>
-                      <p>{post.excerpt}</p>
-                      <p>{post.frontmatter.date}</p>
-                    </ContentText>
-                  </Content>
-                ))}
+                {posts.map(({ node: post }: any) => {
+                  const { excerpt, fields, frontmatter, id } = post;
+                  const { date, thumbnail, title } = frontmatter;
+
+                  return (
+                    <Content key={id} to={fields.slug}>
+                      <ContentThumbnail
+                        thumbnail={
+                          thumbnail.childImageSharp
+                            ? thumbnail.childImageSharp.fluid.src
+                            : thumbnail
+                        }
+                      />
+                      <ContentText>
+                        <div>
+                          <p>{title}</p>
+                          <p>{excerpt}</p>
+                        </div>
+                        <p>{date}</p>
+                      </ContentText>
+                    </Content>
+                  );
+                })}
               </BlogContent>
             </section>
             {cnt === 0 && (
@@ -66,6 +81,8 @@ export default ({ data }) => {
     </Layout>
   );
 };
+
+export default Top;
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -82,6 +99,13 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            thumbnail {
+              childImageSharp {
+                fluid(maxWidth: 240, quality: 64) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             templateKey
             date(formatString: "MMMM DD, YYYY")
           }
@@ -278,12 +302,10 @@ const Content = styled(Link)`
   }
 `;
 
-const ContentColor = styled.div`
-  background: linear-gradient(
-    to right top,
-    rgb(242, 74, 164),
-    rgba(242, 74, 164, 0.5)
-  );
+const ContentThumbnail = styled.div<{ thumbnail: string }>`
+  background-image: url(${({ thumbnail }) => thumbnail});
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 30%;
 `;
 
@@ -293,7 +315,10 @@ const ContentText = styled.div`
   padding: 0 1.5rem;
   background-color: #fff;
   overflow: hidden;
-  > p:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  > div > p:first-child {
     font-size: 2rem;
     font-weight: bolder;
     color: rgb(242, 74, 164);

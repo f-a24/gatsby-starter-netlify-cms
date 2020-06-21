@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import BlogRoll from '../../components/BlogRoll';
 
-export default () => (
+const Blog: React.FC = () => (
   <Layout>
     <>
       <BlogHeader>
@@ -16,6 +16,8 @@ export default () => (
     </>
   </Layout>
 );
+
+export default Blog;
 
 const BlogHeader = styled.div`
   padding: 1rem;

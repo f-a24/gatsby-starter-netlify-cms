@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 
-export default () => (
+const Thanks: React.FC = () => (
   <Layout>
     <Content>
       <Title>Thank you!</Title>
@@ -11,6 +11,8 @@ export default () => (
     </Content>
   </Layout>
 );
+
+export default Thanks;
 
 const Content = styled.div`
   margin-top: calc(50vh - 100px);

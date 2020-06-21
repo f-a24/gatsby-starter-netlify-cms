@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
@@ -18,7 +18,7 @@ const workingHistory = [
   }
 ];
 
-export const AboutPageTemplate = ({ title }: { title: string }) => {
+export const AboutPageTemplate: React.FC<{ title: string }> = ({ title }) => {
   return (
     <>
       <AboutTitle>{title}</AboutTitle>
@@ -57,7 +57,7 @@ export const AboutPageTemplate = ({ title }: { title: string }) => {
           <span>History</span>
         </HistoryTitle>
         <HistoryContents>
-          {workingHistory.map((w) => (
+          {workingHistory.map(w => (
             <HistoryItem>
               <p>{w.company}</p>
               <p>{w.period}</p>
@@ -85,7 +85,7 @@ type PostType = {
   };
 };
 
-export default ({ data }: { data: PostType }) => {
+const AboutPage: React.FC<{ data: PostType }> = ({ data }) => {
   const { markdownRemark: post } = data;
   return (
     <Layout>
@@ -93,6 +93,8 @@ export default ({ data }: { data: PostType }) => {
     </Layout>
   );
 };
+
+export default AboutPage;
 
 export const aboutPageQuery = graphql`
   query AboutPage($id: String!) {

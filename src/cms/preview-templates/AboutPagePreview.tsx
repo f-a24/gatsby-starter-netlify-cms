@@ -1,13 +1,8 @@
 import React, { FC } from 'react';
+import { PreviewTemplateComponentProps } from 'netlify-cms-core';
 import { AboutPageTemplate } from '../../templates/about-page';
 
-type Props = {
-  entry: {
-    getIn(arg: ['data', 'title']): string;
-  };
-};
-
-const AboutPagePreview: FC<Props> = ({ entry }) => (
+const AboutPagePreview: FC<PreviewTemplateComponentProps> = ({ entry }) => (
   <AboutPageTemplate title={entry.getIn(['data', 'title'])} />
 );
 

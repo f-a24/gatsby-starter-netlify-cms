@@ -1,7 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { v4 } from 'uuid';
 
-export default ({ testimonials }: any) => (
+type PropsType = { testimonials: any };
+
+const Testimonials: React.FC<PropsType> = ({ testimonials }: any) => (
   <div>
     {testimonials.map((testimonial: any) => (
       <article key={v4()} className="message">
@@ -14,3 +16,5 @@ export default ({ testimonials }: any) => (
     ))}
   </div>
 );
+
+export default Testimonials;

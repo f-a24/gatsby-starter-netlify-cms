@@ -1,7 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import Img from 'gatsby-image';
 
-export default ({ imageInfo }: any) => {
+type PropsType = {
+  imageInfo: any;
+};
+
+const PreviewCompatibleImage: React.FC<PropsType> = ({ imageInfo }: any) => {
   const imageStyle = { borderRadius: '5px' };
   const { alt = '', childImageSharp, image } = imageInfo;
 
@@ -20,3 +24,5 @@ export default ({ imageInfo }: any) => {
 
   return null;
 };
+
+export default PreviewCompatibleImage;

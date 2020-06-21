@@ -1,8 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import color from './color';
 
-export default ({ animEnd }: { animEnd: () => void }) => (
+type PropsType = { animEnd: () => void };
+
+const IndexLast: React.FC<PropsType> = ({ animEnd }) => (
   <AnimArea>
     <LastAnim>
       <LastSub onAnimationEnd={animEnd} />
@@ -10,6 +12,8 @@ export default ({ animEnd }: { animEnd: () => void }) => (
     </LastAnim>
   </AnimArea>
 );
+
+export default IndexLast;
 
 const areaAnim = keyframes`
   0% {

@@ -12,9 +12,7 @@ export default () => {
 
   const encode = (data: { [key: string]: string }) =>
     Object.keys(data)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-      )
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
       .join('&');
   return (
     <Layout>
@@ -26,7 +24,7 @@ export default () => {
           action="/contact/thanks/"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
             const form = e.target as HTMLFormElement;
             fetch('/', {
@@ -38,7 +36,7 @@ export default () => {
               })
             })
               .then(() => navigate(form.getAttribute('action') as string))
-              .catch((error) => alert(error));
+              .catch(error => alert(error));
           }}
         >
           <div>
@@ -47,7 +45,7 @@ export default () => {
               <StyledInput
                 type="text"
                 name="name"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, name: e.target.value });
                 }}
                 id="name"
@@ -61,7 +59,7 @@ export default () => {
               <StyledInput
                 type="email"
                 name="email"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, email: e.target.value });
                 }}
                 id="email"
@@ -75,7 +73,7 @@ export default () => {
               <StyledTextArea
                 className="textarea"
                 name="message"
-                onChange={(e) => {
+                onChange={e => {
                   setState({ ...state, message: e.target.value });
                 }}
                 id="message"

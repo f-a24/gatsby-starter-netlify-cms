@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-export default () => (
+const Navbar: React.FC = () => (
   <Nav>
     <input type="checkbox" id="burger-check" />
     <Burger htmlFor="burger-check">
@@ -18,6 +18,8 @@ export default () => (
     </Menu>
   </Nav>
 );
+
+export default Navbar;
 
 const Burger = styled.label`
   width: 30px;

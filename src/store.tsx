@@ -1,17 +1,16 @@
-import React, { createContext, Dispatch, useReducer } from 'react';
+import * as React from 'react';
 
-/* initialState */
 const initialState = {
   chapterNo: 0
 };
 
 type ContextType = {
   state: typeof initialState;
-  dispatch: Dispatch<{ type: 'ADD_NO' }>;
+  dispatch: React.Dispatch<{ type: 'ADD_NO' }>;
 };
 
 /* Store */
-export const Store = createContext<ContextType | null>(null);
+export const Store = React.createContext<ContextType | null>(null);
 
 /* Reducer */
 const reducer = (state = initialState, action: { type: 'ADD_NO' }) => {
@@ -28,8 +27,8 @@ const reducer = (state = initialState, action: { type: 'ADD_NO' }) => {
 };
 
 /* Provider */
-export const Provider = ({ children }: { children: JSX.Element }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export const Provider: React.FC = ({ children }) => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
   );

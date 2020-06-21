@@ -1,11 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import { kebabCase } from 'lodash';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../../components/Layout';
 
-const TagsPage = ({
+type PropsType = { data: any };
+
+const TagsPage: React.FC<PropsType> = ({
   data: {
     allMarkdownRemark: { group },
     site: {
@@ -18,7 +20,7 @@ const TagsPage = ({
       <Helmet title={`Tags | ${title}`} />
       <TagHeader>Tags</TagHeader>
       <TagList>
-        {group.map((tag) => (
+        {group.map((tag: any) => (
           <TagItem key={tag.fieldValue}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})

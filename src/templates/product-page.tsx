@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Features from '../components/Features';
@@ -6,7 +6,9 @@ import Testimonials from '../components/Testimonials';
 import Pricing from '../components/Pricing';
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage';
 
-export const ProductPageTemplate = ({
+type TemplateType = any;
+
+export const ProductPageTemplate: React.FC<TemplateType> = ({
   image,
   title,
   heading,
@@ -16,7 +18,7 @@ export const ProductPageTemplate = ({
   testimonials,
   fullImage,
   pricing
-}: any) => (
+}) => (
   <section className="section section--gradient">
     <div className="container">
       <div className="section">
@@ -107,7 +109,7 @@ export const ProductPageTemplate = ({
   </section>
 );
 
-const ProductPage = ({ data }: any) => {
+const ProductPage: React.FC<any> = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
 
   return (

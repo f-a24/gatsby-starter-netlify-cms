@@ -1,13 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-export default () => (
-  <Footer className="footer">
+const Footer: React.FC = () => (
+  <StyledSection>
     <p>Copyright © 2019 @f-a24 All Rights Reserved.</p>
-  </Footer>
+  </StyledSection>
 );
 
-const Footer = styled.section`
+export default Footer;
+
+const StyledSection = styled.section`
   padding: 2rem 0 1rem;
   margin-top: auto;
   text-align: right;

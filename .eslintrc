@@ -37,7 +37,8 @@
       "error",
       {
         "singleQuote": true,
-        "trailingComma": "none"
+        "trailingComma": "none",
+        "arrowParens": "avoid"
       }
     ],
     "react/prop-types": "off",

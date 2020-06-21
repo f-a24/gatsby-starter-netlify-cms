@@ -1,7 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-export default ({ animEnd }: { animEnd: () => void }) => (
+type PropsType = { animEnd: () => void };
+
+const IndexStart: React.FC<PropsType> = ({ animEnd }) => (
   <StartAnim>
     <StarBase onAnimationEnd={animEnd}>
       <StarSub />
@@ -9,6 +11,9 @@ export default ({ animEnd }: { animEnd: () => void }) => (
     </StarBase>
   </StartAnim>
 );
+
+export default IndexStart;
+
 const anim = keyframes`
   from {
     top: -100px;
