@@ -3,6 +3,11 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 
+import profileIcon from '../img/profile.jpg';
+import githubIcon from '../img/github-icon.svg';
+import twitterIcon from '../img/twitter.svg';
+import codepenIcon from '../img/codepen-icon.svg';
+
 const workingHistory = [
   {
     company: 'ISOPRA Inc.',
@@ -24,6 +29,7 @@ export const AboutPageTemplate: React.FC<{ title: string }> = ({ title }) => {
       <AboutTitle>{title}</AboutTitle>
       <Profile>
         <ProfileContents>
+          <ProfileImage src={profileIcon} alt="profile" />
           <ProfileText>
             <ProfileName>
               Atsushi Fujisawa(f-a24)
@@ -31,24 +37,41 @@ export const AboutPageTemplate: React.FC<{ title: string }> = ({ title }) => {
                 href="https://twitter.com/f_a24_"
                 target="_blank"
                 rel="noopener noreferrer"
-              />
+              >
+                <img src={twitterIcon} alt="twitter" />
+              </ProfileSocialIcon>
               <ProfileSocialIcon
                 href="https://github.com/f-a24"
                 target="_blank"
                 rel="noopener noreferrer"
-              />
+              >
+                <img src={githubIcon} alt="github" />
+              </ProfileSocialIcon>
               <ProfileSocialIcon
                 href="https://codepen.io/a24/"
                 target="_blank"
                 rel="noopener noreferrer"
-              />
+              >
+                <img src={codepenIcon} alt="codepen" />
+              </ProfileSocialIcon>
             </ProfileName>
-            <p>1993/7/13 (25)</p>
+            <p>
+              1993/7/13 (
+              {(() => {
+                const today = new Date();
+                const tdate =
+                  today.getFullYear() * 10000 +
+                  (today.getMonth() + 1) * 100 +
+                  today.getDate();
+                return Math.floor((tdate - 19930713) / 10000);
+              })()}
+              )
+            </p>
             <p>main job: LoveLiver</p>
             <p>
               side job: Working at digitalstage Inc. as a Front-end Developer
             </p>
-            <p>hobby: LoveLove, alcohol, football, snowboarding</p>
+            <p>hobby: LoveLive, alcohol, football, snowboarding</p>
           </ProfileText>
         </ProfileContents>
       </Profile>
@@ -58,7 +81,7 @@ export const AboutPageTemplate: React.FC<{ title: string }> = ({ title }) => {
         </HistoryTitle>
         <HistoryContents>
           {workingHistory.map(w => (
-            <HistoryItem>
+            <HistoryItem key={w.company}>
               <p>{w.company}</p>
               <p>{w.period}</p>
               <p>{w.job}</p>
@@ -67,8 +90,8 @@ export const AboutPageTemplate: React.FC<{ title: string }> = ({ title }) => {
           ))}
         </HistoryContents>
         <HistoryBorder>
-          {workingHistory.map(() => (
-            <span />
+          {workingHistory.map(({ company }) => (
+            <span key={company} />
           ))}
         </HistoryBorder>
       </History>
@@ -194,7 +217,7 @@ const ProfileSocialIcon = styled.a`
 
 const History = styled.section`
   position: relative;
-  &::after {
+  /* &::after {
     content: '';
     display: block;
     position: absolute;
@@ -208,7 +231,7 @@ const History = styled.section`
       rgb(242, 74, 164) 51%,
       rgb(0, 173, 254)
     );
-  }
+  } */
 `;
 
 const HistoryTitle = styled.p`

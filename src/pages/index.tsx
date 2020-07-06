@@ -1,83 +1,53 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC } from 'react';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import IndexStart from '../components/animation/IndexStart';
-import IndexSecond from '../components/animation/IndexSecond';
-import IndexLast from '../components/animation/IndexLast';
-import { Store } from '../store';
 
 type Props = { data: any };
 
 const Top: FC<Props> = ({ data }) => {
-  const { state, dispatch } = useContext(Store)!;
-  const { chapterNo } = state;
-  const [cnt, setCnt] = useState(0);
   const { edges: posts } = data.allMarkdownRemark;
   return (
     <Layout>
-      {(chapterNo === 0 && (
-        <IndexStart
-          animEnd={() => {
-            dispatch({ type: 'ADD_NO' });
-          }}
-        />
-      )) ||
-        (chapterNo === 1 && (
-          <IndexSecond
-            animEnd={() => {
-              dispatch({ type: 'ADD_NO' });
-            }}
-          />
-        )) || (
-          <>
-            <TopSection>
-              <TopTitle>Atsushi Fujisawa</TopTitle>
-              <TopJob>
-                <p>Main job : LoveLiver</p>
-                <p>Side job : Front-end Developer</p>
-              </TopJob>
-              <TopBtn to="/about">more</TopBtn>
-            </TopSection>
-            <section>
-              <BlogTitle>
-                <span>Blog</span>
-              </BlogTitle>
-              <BlogContent>
-                {posts.map(({ node: post }: any) => {
-                  const { excerpt, fields, frontmatter, id } = post;
-                  const { date, thumbnail, title } = frontmatter;
+      <TopSection>
+        <TopTitle>Atsushi Fujisawa</TopTitle>
+        <TopJob>
+          <p>Main job : LoveLiver</p>
+          <p>Side job : Front-end Developer</p>
+        </TopJob>
+        <TopBtn to="/about">more</TopBtn>
+      </TopSection>
+      <section>
+        <BlogTitle>
+          <Link to="/blog">Blog</Link>
+        </BlogTitle>
+        <BlogContent>
+          {posts.map(({ node: post }: any) => {
+            const { excerpt, fields, frontmatter, id } = post;
+            const { date, thumbnail, title } = frontmatter;
 
-                  return (
-                    <Content key={id} to={fields.slug}>
-                      <ContentThumbnail
-                        thumbnail={
-                          thumbnail.childImageSharp
-                            ? thumbnail.childImageSharp.fluid.src
-                            : thumbnail
-                        }
-                      />
-                      <ContentText>
-                        <div>
-                          <p>{title}</p>
-                          <p>{excerpt}</p>
-                        </div>
-                        <p>{date}</p>
-                      </ContentText>
-                    </Content>
-                  );
-                })}
-              </BlogContent>
-            </section>
-            {cnt === 0 && (
-              <IndexLast
-                animEnd={() => {
-                  setCnt(cnt + 1);
-                }}
-              />
-            )}
-          </>
-        )}
+            return (
+              <Content key={id} to={fields.slug}>
+                <ContentThumbnail
+                  thumbnail={
+                    thumbnail.childImageSharp
+                      ? thumbnail.childImageSharp.fluid.src
+                      : thumbnail
+                  }
+                />
+                <ContentText>
+                  <div>
+                    <p>{title}</p>
+                    <p>{excerpt}</p>
+                  </div>
+                  <p>{date}</p>
+                </ContentText>
+              </Content>
+            );
+          })}
+          <BlogMoreBtn to="/blog">more</BlogMoreBtn>
+        </BlogContent>
+      </section>
     </Layout>
   );
 };
@@ -235,11 +205,13 @@ const TopBtn = styled(Link)`
 
 const BlogTitle = styled.p`
   position: relative;
-  span {
+  a {
     display: inline-block;
     padding: 1rem 2rem;
     font-size: 3rem;
     color: #fff;
+    text-decoration: none;
+    cursor: pointer;
   }
   &::before {
     content: '';
@@ -329,5 +301,61 @@ const ContentText = styled.div`
   }
   > p:last-child {
     text-align: right;
+    padding-top: 1rem;
+  }
+`;
+
+const BlogMoreBtn = styled(Link)`
+  color: rgb(242, 74, 164);
+  background: linear-gradient(
+    to right bottom,
+    rgb(242, 74, 164),
+    rgb(0, 173, 254)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 3rem;
+  text-decoration: none;
+  margin: 3rem auto;
+  padding: 1rem;
+  text-align: center;
+  border-left: 1px solid rgb(242, 74, 164);
+  border-right: 1px solid rgb(0, 173, 254);
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, rgb(242, 74, 164), rgb(0, 173, 254));
+  }
+  &::before {
+    top: 0;
+    left: 0;
+  }
+  &::after {
+    bottom: 0;
+    right: 0;
+  }
+  &:hover {
+    -webkit-text-fill-color: #fff;
+    border: none;
+    color: #fff;
+    background: linear-gradient(
+      to right bottom,
+      rgb(242, 74, 164),
+      rgb(0, 173, 254)
+    );
+    cursor: pointer;
+    &:before,
+    &:after {
+      display: none;
+    }
   }
 `;

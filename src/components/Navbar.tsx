@@ -12,9 +12,9 @@ const Navbar: React.FC = () => (
       <Item to="/">Home</Item>
       <Item to="/about">About</Item>
       <Item to="/blog">Blog</Item>
-      <Item to="/products">Products</Item>
+      {/* <Item to="/products">Products</Item> */}
       <Item to="/contact">Contact</Item>
-      <Item to="/contact/examples">Form Examples</Item>
+      {/* <Item to="/contact/examples">Form Examples</Item> */}
     </Menu>
   </Nav>
 );
@@ -61,6 +61,8 @@ const Burger = styled.label`
 
 const Menu = styled.div`
   display: none;
+  width: 0;
+  transition: width 0.1s ease-out;
 `;
 
 const Item = styled(Link)``;
